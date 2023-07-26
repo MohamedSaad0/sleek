@@ -16,6 +16,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name');
             $table->longText('images')->nullable();
+            // $table->foreignId('parent_id')->after('images')->nullable()->constrained('categories');
+
             // Add the Foreign Key from the primary key
         });
     }
