@@ -10,6 +10,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Wishlist extends Model
 {
+    protected $fillable = [
+        'user_id',
+        'prod_id'
+    ];
     use HasFactory;
     
     public function user() :BelongsTo {

@@ -9,6 +9,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Image extends Model
 {
+    protected $fillable = [
+        'image_path',
+        'prod_id'
+    ];
     use HasFactory;
     public function product() :BelongsTo{
         return $this->belongsTo(Product::class);

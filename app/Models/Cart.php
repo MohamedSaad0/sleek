@@ -10,6 +10,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Cart extends Model
 {
+    protected $fillable = [
+        'is_active',
+        'qty',
+        'product_id',
+        'user_id',
+    ];
     use HasFactory;
     public function users() :HasMany {
         return $this->hasMany(User::class);

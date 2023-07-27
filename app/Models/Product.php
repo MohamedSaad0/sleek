@@ -13,6 +13,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model
 {
+    protected $fillable = [
+        'name',
+        'description',
+        'price',
+        'category_id'
+    ];
     use HasFactory;
     public function cart() :BelongsTo {
         return $this->belongsTo(Cart::class);
