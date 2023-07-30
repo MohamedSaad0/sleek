@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('resources/admin.layouts');
+// Route::get('/', function () {
+//     return view('admin.layouts');
+// });
+// Route::get('/welcome', function () {
+//     return view('welcome');
+// });
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/admin/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 });
+
+Route::get('/update-profile-information-form', [UserController::class, 'edit']);
+
+
+require_once __DIR__ . '/jetstream.php';

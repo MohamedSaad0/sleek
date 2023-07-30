@@ -10,7 +10,7 @@
 
   <meta name="description" content="" />
 
-  @include('resources.admin.layouts-styles')
+  @include('admin.layouts-styles')
   @yield('page_css')
 
 </head>
@@ -18,13 +18,13 @@
 <body>
   <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
-      @include('resources.admin.sidebar')
-      @include('resources.admin.navbar')
+      @include('admin.sidebar')
+      @include('admin.navbar')
 
       @yield('content')
 
 
-      @include('resources.admin.layouts-scripts')
+      @include('admin.layouts-scripts')
     </div>
 
   </div>
