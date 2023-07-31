@@ -39,6 +39,7 @@
                                                 class="w-px-40 h-auto rounded-circle" />
                                         </div>
                                     </div>
+                                    @auth
                                     <div class="flex-grow-1">
                                         <span class="fw-semibold d-block">{{auth()->user()->name}}</span>
                                         @if(auth()->user()->is_admin == 'Y') 
@@ -47,6 +48,7 @@
                                           </small>
                                           @endif
                                     </div>
+                                    @endauth
                                 </div>
                             </a>
                         </li>

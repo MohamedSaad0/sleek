@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProdcutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,8 +30,12 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
     Route::get('/update-profile-information-form', [UserController::class, 'edit'])->name('admin-edit');
 
+    Route::prefix('dashboard/product')->group(function(){
+        Route::get('create', [ProdcutController::class, 'create'])->name('product.create');
+    });
 });
 
 

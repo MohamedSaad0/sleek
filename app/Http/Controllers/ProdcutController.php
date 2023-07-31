@@ -20,7 +20,8 @@ class ProdcutController extends Controller
      */
     public function create()
     {
-        //
+        $title = "Add Product";
+        return view('products.add', compact('title'));
     }
 
     /**
