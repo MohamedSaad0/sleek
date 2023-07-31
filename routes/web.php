@@ -29,7 +29,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::get('/update-profile-information-form', [UserController::class, 'edit']);
+    Route::get('/update-profile-information-form', [UserController::class, 'edit'])->name('admin-edit');
 
 });
 

@@ -60,13 +60,13 @@ return [
     | and the user is authenticated. You are free to change this value.
     |
     */
-    // 'redirects' => [
+    'redirects' => [
         // 'login' => null,
-        // 'logout' => null,
+        'logout' => RouteServiceProvider::HOME_ADMIN,
         // 'password-confirmation' => null,
         // 'register' => null,
         // 'email-verification' => null,
-    // ],
+    ],
     'home' => RouteServiceProvider::HOME,
 
     /*

@@ -1,4 +1,4 @@
-@extends('admin.layout')
+{{-- @extends('admin.layout')
 @section('content')
-<h1>HHIHI</h1>
-@endsection
+<h1>HHIHsadI</h1>
+@endsection --}}
