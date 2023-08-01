@@ -40,14 +40,14 @@
                                         </div>
                                     </div>
                                     @auth
-                                    <div class="flex-grow-1">
-                                        <span class="fw-semibold d-block">{{auth()->user()->name}}</span>
-                                        @if(auth()->user()->is_admin == 'Y') 
-                                        <small class="text-muted">
-                                            {{'admin'}}
-                                          </small>
-                                          @endif
-                                    </div>
+                                        <div class="flex-grow-1">
+                                            <span class="fw-semibold d-block">{{ auth()->user()->name }}</span>
+                                            @if (auth()->user()->is_admin == 'Y')
+                                                <small class="text-muted">
+                                                    {{ 'admin' }}
+                                                </small>
+                                            @endif
+                                        </div>
                                     @endauth
                                 </div>
                             </a>

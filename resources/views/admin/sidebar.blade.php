@@ -113,7 +113,7 @@
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="pages-account-settings-account.html" class="menu-link">
+                    <a href="{{route('product.index')}}" class="menu-link">
                         <div data-i18n="Account">Show All Products</div>
                     </a>
                 </li>

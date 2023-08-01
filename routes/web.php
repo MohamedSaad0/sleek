@@ -35,7 +35,8 @@ Route::middleware([
 
     Route::prefix('dashboard/product')->group(function(){
         Route::get('create', [ProdcutController::class, 'create'])->name('product.create');
-        Route::get('store', [ProdcutController::class, 'store'])->name('product.store');
+        Route::post('store', [ProdcutController::class, 'store'])->name('product.store');
+        Route::get('index', [ProdcutController::class, 'index'])->name('product.index');
     });
 });
 

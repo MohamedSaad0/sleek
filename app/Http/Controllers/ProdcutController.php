@@ -12,7 +12,8 @@ class ProdcutController extends Controller
      */
     public function index()
     {
-        //
+        $title = "Products";
+        return view('products.index', compact('title'));
     }
 
     /**
@@ -20,8 +21,9 @@ class ProdcutController extends Controller
      */
     public function create()
     {
+        $products = Product::get();
         $title = "Add Product";
-        return view('products.add', compact('title'));
+        return view('products.add', compact('title', 'products'));
     }
 
     /**
@@ -29,11 +31,17 @@ class ProdcutController extends Controller
      */
     public function store(Request $request)
     {
+
         $data = $request->validate([
             'name' => 'required', 'min:5;max:20',
+            'description' => 'required', 'min:5;max:20',
+            'price' => 'required', 'min:5;max:20',
+            'category_id' => 'required', 'min:5;max:20',
+            'image_path' => 'image|mimes:jpeg,png,jpg', 'size:5120'
         ]);
-
+        
         $prodAction = Product::updateOrCreate($data);
+        return redirect()->route('product.index');
     }
 
     /**
