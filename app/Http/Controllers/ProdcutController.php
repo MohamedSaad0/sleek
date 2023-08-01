@@ -29,7 +29,11 @@ class ProdcutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required', 'min:5;max:20',
+        ]);
+
+        $prodAction = Product::updateOrCreate($data);
     }
 
     /**
