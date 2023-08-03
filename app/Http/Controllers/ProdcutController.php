@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -12,8 +13,10 @@ class ProdcutController extends Controller
      */
     public function index()
     {
+        $products = Product::with(['categories', 'images'])->get();
+        // return ($products);
         $title = "Products";
-        return view('products.index', compact('title'));
+        return view('products.index', compact('title', 'products'));
     }
 
     /**
@@ -31,17 +34,32 @@ class ProdcutController extends Controller
      */
     public function store(Request $request)
     {
-
+        // Validate inserted data
         $data = $request->validate([
             'name' => 'required', 'min:5;max:20',
-            'description' => 'required', 'min:5;max:20',
-            'price' => 'required', 'min:5;max:20',
-            'category_id' => 'required', 'min:5;max:20',
-            'image_path' => 'image|mimes:jpeg,png,jpg', 'size:5120'
+            'description' => 'required', 'min:5;max:50',
+            'price' => 'required', 'numeric',
+            'category_id' => 'required',
         ]);
-        
+
         $prodAction = Product::updateOrCreate($data);
-        return redirect()->route('product.index');
+        $prod_id = $prodAction->id;
+        // if the image is created for the same product it will be deleted and created again
+        $duplicationCheck = Image::where('product_id', $prod_id)->delete();
+
+        foreach ($request->image_path as $image) {
+
+            // Image Validation & change sotrage to public
+            $extension = $image->getClientOriginalExtension();
+            $image_name = uniqid() . "." . $extension;
+            $image->move(public_path("images/"), $image_name);
+
+            $saveImage = Image::create([
+                'image_path' => $image_name,
+                'product_id' => $prod_id
+            ]);
+        }
+        return to_route('product.index');
     }
 
     /**
@@ -57,7 +75,10 @@ class ProdcutController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        // $products = Product::get();
+        $title = "Edit Product";
+        $images = Image::where('prod_id', $product->id);
+        return view('products.add', compact('title', 'product', 'images'));
     }
 
     /**

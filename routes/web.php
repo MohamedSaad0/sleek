@@ -33,9 +33,10 @@ Route::middleware([
 
     Route::get('/update-profile-information-form', [UserController::class, 'edit'])->name('admin-edit');
 
-    Route::prefix('dashboard/product')->group(function(){
+    Route::prefix('dashboard/product')->group(function () {
         Route::get('create', [ProdcutController::class, 'create'])->name('product.create');
         Route::post('store', [ProdcutController::class, 'store'])->name('product.store');
+        Route::get('edit/{product}', [ProdcutController::class, 'edit'])->name('product.edit');
         Route::get('index', [ProdcutController::class, 'index'])->name('product.index');
     });
 });
