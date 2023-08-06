@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Image;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProdcutController extends Controller
 {
@@ -78,7 +80,14 @@ class ProdcutController extends Controller
         // $products = Product::get();
         $title = "Edit Product";
         $images = Image::where('prod_id', $product->id);
-        return view('products.add', compact('title', 'product', 'images'));
+        // return Product::with('categories')->get();
+        $categories = Category::get();
+        // $prod_cat = Product::with('categories')->wherePivot('product_id', $product->id);
+        // $prod_cat =  $product->load('categories');
+        $product->selected_categories = $product->categories->pluck('id')->toArray();
+        $images = $product->load('images');
+        // return $images;
+        return view('products.add', compact('title', 'product', 'images', 'categories', 'images'));
     }
 
     /**

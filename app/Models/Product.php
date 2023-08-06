@@ -19,6 +19,8 @@ class Product extends Model
         'price',
         'category_id'
     ];
+
+    protected $with = ['categories'];
     use HasFactory;
     public function cart() :BelongsTo {
         return $this->belongsTo(Cart::class);

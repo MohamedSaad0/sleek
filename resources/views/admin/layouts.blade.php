@@ -13,6 +13,7 @@
   @include('admin.layouts-styles')
   @yield('page_css')
 
+
 </head>
 
 <body>
@@ -25,6 +26,7 @@
 
 
       @include('admin.layouts-scripts')
+      @yield('page_js')
     </div>
 
   </div>
