@@ -6,6 +6,7 @@ use App\Models\Image;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\CategoryProduct;
 use Illuminate\Support\Facades\DB;
 
 class ProdcutController extends Controller
@@ -28,7 +29,10 @@ class ProdcutController extends Controller
     {
         $products = Product::get();
         $title = "Add Product";
-        return view('products.add', compact('title', 'products'));
+        $images = [];
+        $categories = Category::get();
+        // return $categories;
+        return view('products.add', compact('title', 'products', 'categories'));
     }
 
     /**
@@ -36,31 +40,55 @@ class ProdcutController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->images);
+        // dd($request);
         // Validate inserted data
         $data = $request->validate([
             'name' => 'required', 'min:5;max:20',
             'description' => 'required', 'min:5;max:50',
             'price' => 'required', 'numeric',
-            'category_id' => 'required',
+            // 'category_id' => 'required',
         ]);
 
         $prodAction = Product::updateOrCreate($data);
         $prod_id = $prodAction->id;
         // if the image is created for the same product it will be deleted and created again
+
+        // if ($prod_id)
         $duplicationCheck = Image::where('product_id', $prod_id)->delete();
 
-        foreach ($request->image_path as $image) {
-
-            // Image Validation & change sotrage to public
-            $extension = $image->getClientOriginalExtension();
-            $image_name = uniqid() . "." . $extension;
-            $image->move(public_path("images/"), $image_name);
-
-            $saveImage = Image::create([
-                'image_path' => $image_name,
+        // dd($request->category_ids);
+        // $duplicationCheck = CategoryProduct::where('product_id', $prod_id)->where('category_id', $request->category_id)->delete();
+        // if ($request->image_path) {
+        foreach ($request->category_ids as $cat) {
+            $saveCategory = CategoryProduct::create([
+                'category_id' => $cat,
                 'product_id' => $prod_id
             ]);
         }
+        // if ($request->file('images')) {
+        //     dd($request->images);
+        // }
+        if ($request->images) {
+            foreach ($request->images as $image) {
+
+                // $removeImage = Image::where('id', $image)->delete();
+
+                // dd($image);
+
+                // Image Validation & change sotrage to public --- Hashed as it interrupts image update
+                // $extension = $image->getClientOriginalExtension();
+                // $image_name = uniqid() . "." . $extension;
+                // $image->move(public_path("images/"), $image_name);
+                // $image->move(public_path("images/"));
+
+                $saveImage = Image::create([
+                    'image_path' => $image,
+                    'product_id' => $prod_id
+                ]);
+            }
+        }
+
         return to_route('product.index');
     }
 
@@ -79,15 +107,20 @@ class ProdcutController extends Controller
     {
         // $products = Product::get();
         $title = "Edit Product";
-        $images = Image::where('prod_id', $product->id);
+        // return $product->description;
+        $images = Image::where('product_id', $product->id);
         // return Product::with('categories')->get();
         $categories = Category::get();
         // $prod_cat = Product::with('categories')->wherePivot('product_id', $product->id);
         // $prod_cat =  $product->load('categories');
         $product->selected_categories = $product->categories->pluck('id')->toArray();
-        $images = $product->load('images');
+        $images = $product->images;
+        foreach ($images as $image) {
+            $image->image_path = asset('public/images/' . $image->image_path);
+        }
+        $images_exist = true;
         // return $images;
-        return view('products.add', compact('title', 'product', 'images', 'categories', 'images'));
+        return view('products.add', compact('title', 'product', 'images', 'categories'));
     }
 
     /**

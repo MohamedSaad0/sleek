@@ -11,7 +11,7 @@ class Image extends Model
 {
     protected $fillable = [
         'image_path',
-        'prod_id'
+        'product_id'
     ];
     use HasFactory;
     public function product() :BelongsTo{
