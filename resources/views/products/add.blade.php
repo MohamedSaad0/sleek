@@ -63,6 +63,9 @@
                                     </select>
                                 </div>
                             </div>
+                            @if ($title == 'Edit Product') 
+                            <input type="hidden" name="prod_id" value="{{$product->id}}">
+                            @endif
                             {{-- {{dd($images)}} --}}
                             @if ($title == 'Edit Product')
                                 @php $images_exist = true; @endphp
@@ -120,7 +123,7 @@
             $('.input-images-2').imageUploader({
                 preloaded: preloaded,
                 imagesInputName: 'images',
-                preloadedInputName: 'images',
+                preloadedInputName: 'old_photos',
                 maxSize: 2 * 1024 * 1024,
                 maxFiles: 10
             });
