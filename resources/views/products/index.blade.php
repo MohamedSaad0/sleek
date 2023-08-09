@@ -19,6 +19,7 @@
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
+                       
                         @foreach ($products as $product)
                             <tr>
                                 <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
@@ -40,10 +41,7 @@
                                         </li>
                                     </ul>
                                 </td>
-                                {{-- Uncomment after creating the product --}}
-                                {{-- @foreach ($product->categories as $category)
-                                <td><span class="badge bg-label-primary me-1">{{ $category->name }}</span></td>
-                            @endforeach --}}
+                          
                                 <td>Category</td>
                                 <td>
                                     <div class="dropdown">

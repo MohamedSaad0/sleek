@@ -29,8 +29,11 @@
 
 
 <style>
-    .select2-results__option[aria-selected=true] {
+    /* .select2-results__option[aria-selected=true] {
         display: none;
-    }
+    } */
+    .select2-results__option--selected {
+            display: none;
+        }
 </style>
 <!-- Page CSS -->
