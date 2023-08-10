@@ -12,7 +12,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $title = "Category Index";
+        $categories = Category::get();
+        // return $categories;
+        return view('category.index', compact('categories', 'title'));
     }
 
     /**
@@ -20,7 +23,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $title = "Create Category";
+        return view('category.add', compact('title'));
     }
 
     /**
@@ -28,7 +32,20 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $validated_data = $request->validate([
+        //     'name' => 'required|min:5|max:20',
+        //     'images' => 'required|image|'
+        // ]);
+        foreach ($request->images as $image) {
+            $data = [
+                'name' => $request->name,
+                'images' => $image
+            ];
+        }
+        dd($image);
+        // $data = $request->all(['name', 'images']);
+        $category = Category::updateOrCreate(["id" => $request->id], $data);
+        return to_route('category.index');
     }
 
     /**
@@ -44,7 +61,10 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        // return $category;
+        $title = "Edit Category";
+        $images_exist = true;
+        return view('category.add', compact('category', 'title'));
     }
 
     /**

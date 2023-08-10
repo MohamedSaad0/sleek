@@ -14,7 +14,7 @@
                             <th>Product Description</th>
                             <th>Price</th>
                             <th>Images</th>
-                            <th>Category</th>
+                            {{-- <th>Category</th> --}}
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -26,7 +26,7 @@
                                     <strong>{{ $product->name }}</strong>
                                 </td>
                                 <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-                                    <strong>{{ $product->description }}</strong>
+                                    <strong>{{$product->description}}</strong>
                                 </td>
                                 <td> {{ $product->price }}</td>
                                 <td>
@@ -35,18 +35,18 @@
                                             <li data-bs-toggle="tooltip" data-popup="tooltip-custom"
                                                 data-bs-placement="top" class="avatar avatar-xs pull-up"
                                                 title="{{ $product->name }}">
-                                                <img src="{{ URL::to('public/images/' . $image->image_path) }}"
+                                                <img src="{{ URL::to('public/images/products/' . $image->image_path) }}"
                                                     alt="Avatar" class="rounded-circle" />
                                         @endforeach
                                         </li>
                                     </ul>
                                 </td>
 
-                                <td>
+                                {{-- <td>
                                     @foreach ($product->categories as $category)
                                         {{ $category->name }}
                                     @endforeach
-                                </td>
+                                </td> --}}
                                 <td>
                                     <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -64,31 +64,38 @@
                                     </div>
                                 </td>
                             </tr>
+                            <div class="modal fade " id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <button type="button" class="btn-close float-end me-4 mt-2"
+                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                            {{-- @if (!empty($products)) --}}
+                                                <div class="mt-4">
+                                                    Are you sure you want to delete <span class="text-danger">
+                                                        "{{ $product->name }}"
+                                                    </span>
+                                                </div>
+                                            {{-- @endif --}}
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">No</button>
+                                            <button type="button" class="btn btn-primary"> <a
+                                                    href="{{ route('product.destroy', $product) }}"
+                                                    class="text-white">Yes</a></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-            <div class="modal fade " id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <button type="button" class="btn-close float-end me-4 mt-2" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                            <div class="mt-4">
 
-                                Are you sure you want to delete <span class="text-danger"> "{{ $product->name }}"
-                                </span>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                            <button type="button" class="btn btn-primary"> <a
-                                    href="{{ route('product.destroy', $product) }}" class="text-white">Yes</a></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         @endif
     </div>
 </div>

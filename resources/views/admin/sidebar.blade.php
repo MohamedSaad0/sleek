@@ -113,36 +113,31 @@
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="{{route('product.index')}}" class="menu-link">
+                    <a href="{{ route('product.index') }}" class="menu-link">
                         <div data-i18n="Show All Products">Show All Products</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="{{route('product.create')}}" class="menu-link">
-                        <div data-i18n="Add New Product">Add New Product</div>
+                    <a href="{{ route('product.create') }}" class="menu-link">
+                        <div data-i18n="Add New Product">Create New Product</div>
                     </a>
                 </li>
-                {{-- <li class="menu-item">
-                    <a href="pages-account-settings-connections.html" class="menu-link">
-                        <div data-i18n="Connections">Connections</div>
-                    </a>
-                </li> --}}
             </ul>
         </li>
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
-                <div data-i18n="Authentications">Authentications</div>
+                <div data-i18n="Authentications">Category</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="auth-login-basic.html" class="menu-link" target="_blank">
-                        <div data-i18n="Basic">Login</div>
+                    <a href="{{ route('category.index') }}" class="menu-link">
+                        <div data-i18n="Basic">Show All Categories</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="auth-register-basic.html" class="menu-link" target="_blank">
-                        <div data-i18n="Basic">Register</div>
+                    <a href="{{ route('category.create') }}" class="menu-link">
+                        <div data-i18n="Basic">Create New Category</div>
                     </a>
                 </li>
                 <li class="menu-item">

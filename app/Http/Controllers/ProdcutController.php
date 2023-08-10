@@ -60,7 +60,7 @@ class ProdcutController extends Controller
         }
         if ($request->hasfile('images')) {
             foreach ($request->file('images') as $item) {
-                $path = 'public/images/';
+                $path = 'public/images/products/';
                 $image = new Image();
                 $name = "product-" . time() . $item->getClientOriginalName();
                 $item->move($path, $name);
@@ -92,7 +92,7 @@ class ProdcutController extends Controller
         $product->selected_categories = $product->categories->pluck('id')->toArray();
         $images = $product->images;
         foreach ($images as $image) {
-            $image->image_path = asset('public/images/' . $image->image_path);
+            $image->image_path = asset('public/images/products/' . $image->image_path);
         }
         $images_exist = true;
         return view('products.add', compact('title', 'product', 'images', 'categories'));

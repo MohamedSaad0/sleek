@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProdcutController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,14 @@ Route::middleware([
         Route::get('edit/{product}', [ProdcutController::class, 'edit'])->name('product.edit');
         Route::get('index', [ProdcutController::class, 'index'])->name('product.index');
         Route::get('destroy/{product}', [ProdcutController::class, 'destroy'])->name('product.destroy');
+    });
+
+    Route::prefix('dashboard/category')->group(function () {
+        Route::get('create', [CategoryController::class, 'create'])->name('category.create');
+        Route::post('store', [CategoryController::class, 'store'])->name('category.store');
+        Route::get('index', [CategoryController::class, 'index'])->name('category.index');
+        Route::get('edit/{category}', [CategoryController::class, 'edit'])->name('category.edit');
+        Route::get('destroy/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
     });
 });
 
