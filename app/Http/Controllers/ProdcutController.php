@@ -18,7 +18,6 @@ class ProdcutController extends Controller
     {
         // $products = Product::with(['categories', 'images'])->get([DB::raw('concat(name," ",price) as name'),'price']);
         $products = Product::with(['categories', 'images'])->get();
-        // return ($products);
         $title = "Products";
         return view('products.index', compact('title', 'products'));
     }
@@ -32,7 +31,6 @@ class ProdcutController extends Controller
         $title = "Add Product";
         $images = [];
         $categories = Category::get();
-        // return $categories;
         return view('products.add', compact('title', 'products', 'categories'));
     }
 
@@ -87,21 +85,16 @@ class ProdcutController extends Controller
      */
     public function edit(Product $product)
     {
-        // $products = Product::get();
         $title = "Edit Product";
-        // return $product->description;
         $images = Image::where('product_id', $product->id);
-        // return Product::with('categories')->get();
         $categories = Category::get();
-        // $prod_cat = Product::with('categories')->wherePivot('product_id', $product->id);
-        // $prod_cat =  $product->load('categories');
+        // Capture the selected product related categories -- extracting its ids using eloquent pluck function
         $product->selected_categories = $product->categories->pluck('id')->toArray();
         $images = $product->images;
         foreach ($images as $image) {
             $image->image_path = asset('public/images/' . $image->image_path);
         }
         $images_exist = true;
-        // return $images;
         return view('products.add', compact('title', 'product', 'images', 'categories'));
     }
 
@@ -118,6 +111,9 @@ class ProdcutController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->categories()->detach();
+        $product->images()->delete();
+        $product->delete();
+        return to_route('product.index');
     }
 }

@@ -8,9 +8,6 @@
                 Add New Product
             @endif
         </h4>
-        {{-- {{dd($product)}} --}}
-        {{-- {{dd($prodCat)}} --}}
-
         <div class="row">
             <!--  Layout -->
             <div class="col-xxl">
@@ -33,8 +30,8 @@
                                 <div class="col-sm-10">
                                     <textarea class="form-control" name="description" id="productDescription" rows="3"
                                         placeholder="Product Description">
-@if ($title == 'Edit Product') {{ $product->description }} @endif
-</textarea>
+                                      @if ($title == 'Edit Product') {{ $product->description }} @endif
+                                    </textarea>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -63,31 +60,21 @@
                                     </select>
                                 </div>
                             </div>
-                            @if ($title == 'Edit Product') 
-                            <input type="hidden" name="prod_id" value="{{$product->id}}">
+                            @if ($title == 'Edit Product')
+                                <input type="hidden" name="prod_id" value="{{ $product->id }}">
                             @endif
-                            {{-- {{dd($images)}} --}}
                             @if ($title == 'Edit Product')
                                 @php $images_exist = true; @endphp
                             @elseif($title == 'Add Product')
                                 @php $images_exist = false; @endphp
-
                             @endif
-
-                            {{-- @if ($title == 'Add Product')
-                                @php
-                                    ($images = false);
-                                @endphp
-                            @endif --}}
-
-                            {{-- @endphp --}}
                             <div class="mb-3 row ">
                                 <label for="formFileMultiple" class="form-label col-form-label col-sm-2">Images</label>
                                 <div @class([
                                     'mb-3',
                                     'col-sm-10',
                                     'input-images-2' => $images_exist,
-                                    'input-images-1' => !$images_exist
+                                    'input-images-1' => !$images_exist,
                                 ])>
 
                                     <input type="image" src="" alt="">
@@ -128,8 +115,5 @@
                 maxFiles: 10
             });
         @endif
-        // {{-- let images = @json($images); --}}
-
-        // $('.input-images-1').imageUploader();
     </script>
 @endsection
