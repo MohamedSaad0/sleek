@@ -20,8 +20,7 @@
                                         placeholder="Category Name" name="name"
                                         value="{{ $title == 'Edit Category' ? $category->name : '' }}" />
                                     @if ($title == 'Edit Category')
-                                        <input type="hidden" name="cat_id"
-                                            value="{{$category->id }}">
+                                        <input type="hidden" name="cat_id" value="{{ $category->id }}">
                                     @endif
                                 </div>
                             </div>
