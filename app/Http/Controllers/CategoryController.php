@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,6 @@ class CategoryController extends Controller
     {
         $title = "Category Index";
         $categories = Category::get();
-        // return $categories;
         return view('category.index', compact('categories', 'title'));
     }
 
@@ -24,6 +24,7 @@ class CategoryController extends Controller
     public function create()
     {
         $title = "Create Category";
+
         return view('category.add', compact('title'));
     }
 
@@ -32,19 +33,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        // $validated_data = $request->validate([
-        //     'name' => 'required|min:5|max:20',
-        //     'images' => 'required|image|'
-        // ]);
-        foreach ($request->images as $image) {
-            $data = [
-                'name' => $request->name,
-                'images' => $image
-            ];
+        $data['name'] = $request->name;
+        if ($request->hasfile('images')) {
+            foreach ($request->file('images') as $item) {
+                $path = 'public/images/categories/';
+                $name = "category-" . time() . $item->getClientOriginalName();
+                $item->move($path, $name);
+                $data['images'] = $name;
+            }
         }
-        dd($image);
-        // $data = $request->all(['name', 'images']);
-        $category = Category::updateOrCreate(["id" => $request->id], $data);
+        // dd($request->cat_id);
+        $category = Category::updateOrCreate(["id" => $request->cat_id], $data);
+        // return $category;
         return to_route('category.index');
     }
 
@@ -63,6 +63,7 @@ class CategoryController extends Controller
     {
         // return $category;
         $title = "Edit Category";
+        $category->image_path = asset('public/images/categories/' . $category->images);
         $images_exist = true;
         return view('category.add', compact('category', 'title'));
     }
@@ -80,6 +81,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return to_route('category.index');
     }
 }

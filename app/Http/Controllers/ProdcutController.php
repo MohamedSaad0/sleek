@@ -43,6 +43,9 @@ class ProdcutController extends Controller
             'description' => 'required', 'min:5;max:50',
             'price' => 'required', 'numeric',
         ]);
+
+        //  dd($request);
+
         $prodAction = Product::updateOrCreate(["id" => $request->prod_id], $data);
 
         $prod_id = $prodAction->id;

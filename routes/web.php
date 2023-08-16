@@ -39,7 +39,7 @@ Route::middleware([
         Route::post('store', [ProdcutController::class, 'store'])->name('product.store');
         Route::get('edit/{product}', [ProdcutController::class, 'edit'])->name('product.edit');
         Route::get('index', [ProdcutController::class, 'index'])->name('product.index');
-        Route::get('destroy/{product}', [ProdcutController::class, 'destroy'])->name('product.destroy');
+        Route::delete('destroy/{product}', [ProdcutController::class, 'destroy'])->name('product.destroy');
     });
 
     Route::prefix('dashboard/category')->group(function () {

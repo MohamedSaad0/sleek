@@ -4,9 +4,7 @@
 
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Category/</span>
-            @if ($title == 'Create Category')
-                Add New Category
-            @endif
+            {{ $title == 'Create Category' ? 'Add New Category' : 'Edit Category' }}
         </h4>
         <div class="row">
             <!--  Layout -->
@@ -21,6 +19,10 @@
                                     <input type="text" class="form-control" id="basic-default-name"
                                         placeholder="Category Name" name="name"
                                         value="{{ $title == 'Edit Category' ? $category->name : '' }}" />
+                                    @if ($title == 'Edit Category')
+                                        <input type="hidden" name="cat_id"
+                                            value="{{$category->id }}">
+                                    @endif
                                 </div>
                             </div>
                             @if ($title == 'Create Category')
@@ -59,7 +61,7 @@
 @section('page_js')
     <script>
         @if ($title == 'Edit Category')
-    
+
             let category = @json($category);
             let preloaded = [];
             preloaded.push({

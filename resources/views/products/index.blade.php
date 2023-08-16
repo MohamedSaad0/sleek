@@ -26,7 +26,7 @@
                                     <strong>{{ $product->name }}</strong>
                                 </td>
                                 <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
-                                    <strong>{{$product->description}}</strong>
+                                    <strong>{{ $product->description }}</strong>
                                 </td>
                                 <td> {{ $product->price }}</td>
                                 <td>
@@ -58,38 +58,39 @@
                                                     class="bx bx-edit-alt me-1"></i>
                                                 Edit</a>
                                             <a class="dropdown-item" data-bs-toggle="modal" href=""
-                                                data-bs-target="#deleteModal"><i class="bx bx-trash me-1"></i>
+                                                data-bs-target="#deleteModal{{ $loop->index }}"><i
+                                                    class="bx bx-trash me-1"></i>
                                                 Delete</a>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-                            <div class="modal fade " id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <button type="button" class="btn-close float-end me-4 mt-2"
-                                                data-bs-dismiss="modal" aria-label="Close"></button>
-                                            {{-- @if (!empty($products)) --}}
+                            <form action="{{ route('product.destroy', $product) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <div class="modal fade " id="deleteModal{{ $loop->index }}" tabindex="-1"
+                                    aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <button type="button" class="btn-close float-end me-4 mt-2"
+                                                    data-bs-dismiss="modal" aria-label="Close"></button>
                                                 <div class="mt-4">
                                                     Are you sure you want to delete <span class="text-danger">
                                                         "{{ $product->name }}"
                                                     </span>
                                                 </div>
-                                            {{-- @endif --}}
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">No</button>
-                                            <button type="button" class="btn btn-primary"> <a
-                                                    href="{{ route('product.destroy', $product) }}"
-                                                    class="text-white">Yes</a></button>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">No</button>
+                                                <button type="submit" class="btn btn-primary">
+                                                    Yes</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                         @endforeach
                     </tbody>
                 </table>

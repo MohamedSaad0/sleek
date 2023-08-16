@@ -25,7 +25,7 @@
                                     <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
                                         <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
                                             class="avatar avatar-xs pull-up" title="{{ $category->name }}">
-                                            <img src="{{ URL::to('public/images/') . $category->images }}"
+                                            <img src="{{ URL::to('public/images/categories/' . $category->images) }}"
                                                 alt="Avatar" class="rounded-circle" />
                                         </li>
                                     </ul>
@@ -41,39 +41,47 @@
                                                     class="bx bx-edit-alt me-1"></i>
                                                 Edit</a>
                                             <a class="dropdown-item" data-bs-toggle="modal" href=""
-                                                data-bs-target="#deleteModal"><i class="bx bx-trash me-1"></i>
+                                                data-bs-target="#deleteModal{{ $loop->index }}"><i
+                                                    class="bx bx-trash me-1"></i>
                                                 Delete</a>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                            <form action="{{ route('category.destroy', $category) }}">
+                            @csrf
+                            @method('DELETE')
+                            </form>
+                            <div class="modal fade " id="deleteModal{{ $loop->index }}" tabindex="-1"
+                                aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <button type="button" class="btn-close float-end me-4 mt-2"
+                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                            @if (!empty($categories))
+                                                <div class="mt-4">
+                                                    Are you sure you want to delete <span class="text-danger">
+                                                        "{{ $category->name }}"
+                                                    </span>
+                                                </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">No</button>
+                                            <button type="submit" class="btn btn-primary">
+                                                Yes</button>
+                                        </div>
+                        @endif
             </div>
-            <div class="modal fade " id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <button type="button" class="btn-close float-end me-4 mt-2" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                            <div class="mt-4">
-                                Are you sure you want to delete <span class="text-danger"> "{{ $category->name }}"
-                                </span>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                            <button type="button" class="btn btn-primary"> <a
-                                    href="{{ route('category.destroy', $category) }}"
-                                    class="text-white">Yes</a></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
     </div>
+</div>
+@endforeach
+</tbody>
+</table>
+</div>
+@endif
+</div>
 </div>
 @section('script_js')
     <script></script>
