@@ -24,9 +24,9 @@ use App\Http\Controllers\CategoryController;
 // });
 
 Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
+    // 'auth:sanctum',
+    // config('jetstream.auth_session'),
+    // 'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -50,6 +50,10 @@ Route::middleware([
         Route::delete('destroy/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
     });
 });
+
+Route::view('/index', 'user/index');
+    
+
 
 
 
