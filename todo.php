@@ -3,7 +3,5 @@
 /**
  * Map the srcs files
  * Fix title and send it as var from the controller
- * 
- * 
- * 
+ *  
  */
