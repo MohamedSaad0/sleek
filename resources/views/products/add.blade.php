@@ -30,15 +30,15 @@
                                 <div class="col-sm-10">
                                     <textarea class="form-control" name="description" id="productDescription" rows="3"
                                         placeholder="Product Description">
-@if ($title == 'Edit Product'){{ $product->description }}@endif
-</textarea>
+                                         @if ($title == 'Edit Product'){{ $product->description }}@endif
+                                    </textarea>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="price">Product Price</label>
                                 <div class="col-sm-10">
-                                    <input type="number" class="form-control" id="price" placeholder="Product Price"
-                                        name="price"
+                                    <input type="text" class="form-control" id="price" step="0.01"
+                                        placeholder="Product Price" name="price"
                                         @if ($title == 'Edit Product') value="{{ $product->price }}" @endif />
                                 </div>
                             </div>
