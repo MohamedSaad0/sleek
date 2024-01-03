@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProdcutController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserControllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,8 +53,9 @@ Route::middleware([
 });
 
 Route::view('/index', 'user/index');
-    
+// Route::view('/index/products', 'user/index');
 
+Route::get('/index/products', [HomeController::class, 'index']);
 
 
 
