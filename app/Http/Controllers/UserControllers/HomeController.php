@@ -12,10 +12,11 @@ class HomeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(ProductService $ProductService)
+    public function index()
     {
-        $products = $ProductService->getProducts();
-        dd($products);
+        $service = new ProductService();
+        $products = $service->getProducts();
+        return view('user/index', compact('products'));
     }
 
     /**
@@ -23,7 +24,7 @@ class HomeController extends Controller
      */
     public function Producteate()
     {
-        //
+        echo "YOHO";
     }
 
     /**

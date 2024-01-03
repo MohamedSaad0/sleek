@@ -52,10 +52,10 @@ Route::middleware([
     });
 });
 
-Route::view('/index', 'user/index');
+// Route::view('/index', 'user/index');
 // Route::view('/index/products', 'user/index');
 
-Route::get('/index/products', [HomeController::class, 'index']);
+Route::get('/index', [HomeController::class, 'index'])->name('user.index');
 
 
 
