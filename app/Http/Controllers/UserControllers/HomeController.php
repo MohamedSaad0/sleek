@@ -16,7 +16,16 @@ class HomeController extends Controller
     {
         $service = new ProductService();
         $products = $service->getProducts();
+        $fruitCat = $products->filter(function ($prod) {
+            return $prod['category'] == 'Fruits';
+        });
+        // $categoryNames = $products->pluck('relations.categories.items.0.attributes.name');
+        // $categoryNames = $products->categories->pluck('id')->toArray();
+        // $product->selected_categories = ;
+
+
         return view('user/index', compact('products'));
+        return view('user/index', compact('categoryNames'));
     }
 
     /**

@@ -1,5 +1,6 @@
 @php
-dd($products)    
+dd($products);   
+// dd($categoryNames)    
 @endphp
 @include('user.layout.layouts')
 
