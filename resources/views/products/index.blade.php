@@ -1,7 +1,7 @@
 @extends('admin.layouts')
 @section('content')
 @section('title', $title ?? '')
-@php dd($products); @endphp
+
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card">
         @if (!empty($products))
