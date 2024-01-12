@@ -16,12 +16,12 @@ class HomeController extends Controller
     {
         $service = new ProductService();
         $products = $service->getProducts();
-        $fruitCat = $products->filter(function ($prod) {
-            return $prod['category'] == 'Fruits';
-        });
+        // $fruitCat = $products->filter(function ($prod) {
+        //     return $prod['category'] == 'Fruits';
+        // });
 
         return view('user/index', compact('products'));
-        return view('user/index', compact('categoryNames'));
+        // return view('user/index', compact('categoryNames'));
     }
 
     /**
