@@ -1195,8 +1195,3 @@
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i
             class="fa fa-arrow-up"></i></a>
-
-
-
-            src="http://localhost/sleek/public/images/products/Chicken-Curry-Cut.jpg"
-            http://localhost/sleek/public/images/products/product-1705093995vegetable-item-5.jpg
