@@ -22,16 +22,28 @@ class Product extends Model
 
     protected $with = ['categories'];
     use HasFactory;
-    public function cart() :BelongsTo {
+    public function cart(): BelongsTo
+    {
         return $this->belongsTo(Cart::class);
     }
-    
-    public function categories() :BelongsToMany {
-        return $this->belongsToMany(Category::class,CategoryProduct::class);
+
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(Category::class, CategoryProduct::class);
     }
 
-    public function images() :HasMany {
+    public function images(): HasMany
+    {
         return $this->hasMany(Image::class);
     }
 
+    /**
+     * Filter products by subcategory
+     * @param string $subcategory name
+     * @return \Illuminate\Support\Collection
+     */
+    public function filterBySubCategory($query,$subcategory)
+    {
+        return $query->where('subcategory', $subcategory)->get();
+    }
 }

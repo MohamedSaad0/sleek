@@ -6,6 +6,9 @@ use App\Models\Product;
 
 class ProductService
 {
+    /**
+     * @return all products with their associated categories & images
+     */
     public function getProducts()
     {
         // $products = Product::get();

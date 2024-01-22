@@ -16,12 +16,8 @@ class HomeController extends Controller
     {
         $service = new ProductService();
         $products = $service->getProducts();
-        // $fruitCat = $products->filter(function ($prod) {
-        //     return $prod['category'] == 'Fruits';
-        // });
-
+        // $cat = Product::filterBySubCategory();
         return view('user/index', compact('products'));
-        // return view('user/index', compact('categoryNames'));
     }
 
     /**
