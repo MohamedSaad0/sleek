@@ -39,6 +39,10 @@ class ImagesSeeder extends Seeder
                     'image_path' => 'croissant-bread.jpg',
                     'product_id' => '6'
                 ],
+                [
+                    'image_path' => 'baner-1.png',
+                    'product_id' => '7'
+                ],
             ]
         );
     }

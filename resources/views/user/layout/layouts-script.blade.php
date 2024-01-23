@@ -11,7 +11,7 @@
 
     <script src="{{ asset('resources/user/assets/lib/easing/easing.min.js') }}"></script>
     <script src="{{ asset('resources/user/assets/lib/waypoints/waypoints.min.js') }}"></script>
-    <script src="{{ asset('resources/user/assets/lightbox/js/lightbox.min.js') }}"></script>
+    <script src="{{ asset('resources/user/assets/lib/lightbox/js/lightbox.min.js') }}"></script>
     <script src="{{ asset('resources/user/assets/lib/owlcarousel/owl.carousel.min.js') }}"></script>
 
     <!-- Template Javascript -->

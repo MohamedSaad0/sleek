@@ -21,7 +21,7 @@
 
     @yield('content')
 
-    @include('user.layout.layouts-script');
+    {{-- @include('user.layout.layouts-script'); --}}
 </body>
 
 </html>

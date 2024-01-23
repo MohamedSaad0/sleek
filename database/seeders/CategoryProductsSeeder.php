@@ -38,6 +38,10 @@ class CategoryProductsSeeder extends Seeder
                 [
                     'category_id' => '3',
                     'product_id' => '1',
+                ],
+                [
+                    'category_id' => '7',
+                    'product_id' => '6',
                 ]
             ]
                 );
